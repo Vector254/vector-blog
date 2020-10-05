@@ -32,6 +32,20 @@ def new_post():
         return redirect(url_for('main.index'))
     return render_template('post.html',form=form)
 
+
+
 @main.route('/comment')
-def comment():
-    return render_template('comment.html')
+def new_comment():
+    form = CommentForm()
+    post=Posts.query.get(post_id)
+    if form.validate_on_submit():
+        post = form.post.data
+
+        new_comment = Comment(post=post,user_id = current_user._get_current_object().id, post_id = post_id)
+        db.session.add(new_comment)
+        db.session.commit()
+
+        return redirect(url_for('.new_comment', post_id= post_id))
+    all_comments = Comment.query.filter_by(post_id = post_id).all()
+    return render_template('comments.html', form = form,comment = all_comments )
+

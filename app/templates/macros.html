@@ -5,3 +5,23 @@
     {% endfor %}
 
 {% endmacro %}
+
+{% macro displayComment(comments) %}
+<ul>
+			{% if comments %}
+			{% for comment in comments %}
+				
+				<a href="#">
+						
+					<h4>{{ comment.description }}</h4>
+					 <b>posted by:</b>   <i>{{comment.user.username}}</i>
+				</a>
+				
+			{% endfor %}
+			{% else %}
+
+			<h3>No comments for this post yet!!</h3>
+			{%endif%}
+
+	</ul>
+	{% endmacro %}
