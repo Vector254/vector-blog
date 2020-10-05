@@ -3,6 +3,7 @@ from sqlalchemy.sql import func
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from . import login_manager
+from datetime import datetime
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -48,8 +49,11 @@ class Posts(db.Model):
     __tablename__= 'posts'
     id = db.Column(db.Integer,primary_key = True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
+    author = db.Column(db.String(50))
+    date_posted = db.Column(db.DateTime)
     title = db.Column(db.String(50))
     post = db.Column(db.String(255))
+
     comments = db.relationship('Comment',backref='post',lazy='dynamic')
    
     def save_pitch(self):
