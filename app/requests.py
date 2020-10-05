@@ -1,7 +1,7 @@
 import requests
 from .models import Quote
 
-url = "http://quotes.stormconsultancy.co.uk/random.json"
+url = "https://vector-restful-api.herokuapp.com/vector/api/v1.0/quotes/1"
 
 def get_quote():
     """
@@ -9,5 +9,5 @@ def get_quote():
     """
     response = requests.get(url).json()
 
-    random_quote = Quote(response.get("author"), response.get("quote"))
+    random_quote = Quote(response.get("author"), response.get("description"))
     return random_quote

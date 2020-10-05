@@ -82,3 +82,9 @@ class Subscribers(db.Model):
     __tablename__ = "subscribers"
     id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(255), unique = True, index = True)
+
+class Quote:
+   
+    def __init__(self, author, description):
+        self.author = author
+        self.description = description

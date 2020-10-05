@@ -5,11 +5,12 @@ from .forms import CommentForm,PostForm,UpdateProfile
 from flask_login import login_required, current_user
 from ..import db, photos
 from ..email import mail_message
+from ..requests import get_quote
 
 @main.route('/',methods = ["GET", "POST"])
 def index():
     posts = Posts.query.order_by(Posts.date_posted.desc()).all()
-
+    quote = get_quote()
     user=User()
     if request.method == "POST":
         subscribed = Subscribers(email = request.form.get("subs"))
@@ -17,7 +18,7 @@ def index():
         db.session.commit()
        
     
-    return render_template('index.html',posts = posts)
+    return render_template('index.html',posts = posts,quote=quote)
 
 @main.route('/about')
 def about():
