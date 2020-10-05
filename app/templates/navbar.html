@@ -1,26 +1,31 @@
-<style>
-    
-    ul li {
+<nav class="nav">
+    <a id="titles" class="navbar-brand" href="/">Pitcher</a>
+   
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/"><span class="sr-only">(current)</span></a>
+        </li>
+      </ul>  
         
-        display: inline;
-        text-align: center;
-        padding: 10px;
+  <br>
+      <ul>
+        {% if current_user.is_authenticated %}
+        <li class="nav-item">
+            {{current_user.username}}
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('auth.logout')}}">Log out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('auth.login')}}">Log in</a>
+        </li>
         
-    }
-</style>
-<div class="nav">
-    <div class="name">vector blog</div>
-    <div class="navi">
-        <ul>
-            <li>
-                <a href="#">Home</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <button class="btn btn-info"><a href="#">login</a></button>
-            </li>
+          
+        {%endif%}
+     
         </ul>
     </div>
-</div>
+  </nav>

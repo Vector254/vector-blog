@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from . import main
 from ..models import Posts
 from .forms import CommentForm,PostForm
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, 
 
 @main.route('/')
 def index():
