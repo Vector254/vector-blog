@@ -6,13 +6,13 @@ def index():
     return render_template('index.html')
 
 @main.route('/about')
-def index():
+def about():
     return render_template('about.html')
 
 @main.route('/post')
-def index():
+def post():
     return render_template('post.html')
 
 @main.route('/comment')
-def index():
+def comment():
     return render_template('comment.html')
