@@ -5,7 +5,7 @@ class Config:
 
     SECRET_KEY = os.urandom(32)
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://vector:12345q@localhost/blog'
-   
+    UPLOADED_PHOTOS_DEST ='app/static/images'
 
 
 class ProdConfig(Config):

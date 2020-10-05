@@ -1,8 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, abort, request
 from . import main
-from ..models import Posts, Comment
-from .forms import CommentForm,PostForm
+from ..models import Posts, Comment, User
+from .forms import CommentForm,PostForm,UpdateProfile
 from flask_login import login_required, current_user
+from ..import db, photos
 
 @main.route('/')
 def index():
@@ -47,4 +48,43 @@ def new_comment(post_id):
         return redirect(url_for('.new_comment', post_id= post_id))
     all_comments = Comment.query.filter_by(post_id = post_id).all()
     return render_template('comment.html', form = form,comment = all_comments )
+
+@main.route('/profile/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
+
+@main.route('/user/<uname>/update',methods = ['GET','POST'])
+@login_required
+def update_profile(uname):
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',uname=user.username))
+
+    return render_template('profile/update.html',form =form)
+
+@main.route('/user/<uname>/update/pic',methods= ['POST'])
+@login_required
+def update_pic(uname):
+    user = User.query.filter_by(username = uname).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'images/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()
+    return redirect(url_for('main.profile',uname=uname))
 
