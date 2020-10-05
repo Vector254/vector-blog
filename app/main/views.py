@@ -16,6 +16,7 @@ def about():
 
 
 @main.route('/post', methods = ['GET','POST'])
+@login_required
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
@@ -32,6 +33,7 @@ def new_post():
 
 
 @main.route('/comment/<int:post_id>', methods = ['GET','POST'])
+@login_required
 def new_comment():
     form = CommentForm()
     post=Posts.query.get(post_id)
