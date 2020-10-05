@@ -15,7 +15,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255),unique = True,nullable = False)
     password = db.Column(db.String(255),nullable = False)
     pass_secure = db.Column(db.String(255))
-    profile_pic_path = db.Column(db.String())
     posts = db.relationship('Posts', backref='user', lazy='dynamic')
     comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
    
@@ -49,9 +48,8 @@ class Posts(db.Model):
     __tablename__= 'posts'
     id = db.Column(db.Integer,primary_key = True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
-    category = db.Column(db.String(255))
     title = db.Column(db.String(50))
-    pitch = db.Column(db.String(255))
+    post = db.Column(db.String(255))
     comments = db.relationship('Comment',backref='post',lazy='dynamic')
    
     def save_pitch(self):
@@ -66,7 +64,7 @@ class Comment(db.Model):
     __tablename__='comments'
     
     id = db.Column(db.Integer,primary_key=True)
-    pitch_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
     description = db.Column(db.Text)
 
