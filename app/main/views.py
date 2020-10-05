@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from . import main
 from ..models import Posts
 from .forms import CommentForm,PostForm
+from flask_login import login_required, current_user
 
 @main.route('/')
 def index():
@@ -13,12 +14,8 @@ def index():
 def about():
     return render_template('about.html')
 
-@main.route('/pitches/new/', methods = ['GET','POST'])
-@login_required
 
-
-
-@main.route('/post')
+@main.route('/post', methods = ['GET','POST'])
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
@@ -30,11 +27,11 @@ def new_post():
         new_post.save_post()
 
         return redirect(url_for('main.index'))
-    return render_template('post.html',form=form)
+    return render_template('posts.html',form=form)
 
 
 
-@main.route('/comment')
+@main.route('/comment/<int:post_id>', methods = ['GET','POST'])
 def new_comment():
     form = CommentForm()
     post=Posts.query.get(post_id)

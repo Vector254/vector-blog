@@ -2,6 +2,7 @@
 
     {% for post in posts %}
         <h3><b>title:</b>{{post.title}}</h3>
+        <a href="{{url_for('main.new_comment',post_id = post.id)}}" class="btn btn-info">comment</a>
     {% endfor %}
 
 {% endmacro %}
