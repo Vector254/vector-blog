@@ -1,0 +1,4 @@
+Hello {{user.username}}
+Welcome to Vector blog.
+We have just seen you have subscribed for our alerts and want to welcome you to the family. 
+Please enjoy the blogs.
