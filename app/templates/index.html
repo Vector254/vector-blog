@@ -1,4 +1,5 @@
 {% extends 'base.html'%}
+{% import 'macros.html' as macro %}
 
 
 
@@ -6,4 +7,5 @@
 <div class="jumbotron">
     <h1 class="text center"><u><b>vector blog</b></u></h1>
 </div>
+{{ macro.display(posts) }}
 {% endblock %}
