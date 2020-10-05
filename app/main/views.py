@@ -4,6 +4,7 @@ from ..models import Posts, Comment, User
 from .forms import CommentForm,PostForm,UpdateProfile
 from flask_login import login_required, current_user
 from ..import db, photos
+from ..myemail import mail_message
 
 @main.route('/')
 def index():
