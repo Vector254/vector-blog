@@ -52,11 +52,11 @@ class Posts(db.Model):
     author = db.Column(db.String(50))
     date_posted = db.Column(db.DateTime)
     title = db.Column(db.String(50))
-    post = db.Column(db.String(255))
+    post = db.Column(db.String(999))
 
     comments = db.relationship('Comment',backref='post',lazy='dynamic')
    
-    def save_pitch(self):
+    def save_post(self):
         db.session.add(self)
         db.session.commit()
 

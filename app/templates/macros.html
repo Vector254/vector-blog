@@ -1,8 +1,22 @@
-{% macro display(posts) %}
+{% macro display(posts_list) %}
 
-    {% for post in posts %}
-        <h3><b>title:</b>{{post.title}}</h3>
-        <a href="{{url_for('main.new_comment',post_id = post.id)}}" class="btn btn-info">comment</a>
+    {% for post in posts_list %}
+    <div class="card text-center">
+        <div class="card-header">
+          by:{{post.author}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{post.title}}</h5>
+          <p class="card-text">{{post.post}}</p>
+          <a href="#" class="btn btn-primary">read more >></a>
+          
+        </div>
+        <div class="card-footer text-muted">
+          <b>posted:</b>{{post.date_posted}}
+          <a href="{{url_for('main.new_comment',post_id = post.id)}}" class="btn btn-info">comment</a>
+        </div>
+      </div>
+       
     {% endfor %}
 
 {% endmacro %}
@@ -10,13 +24,24 @@
 {% macro displayComment(comments) %}
 <ul>
 			{% if comments %}
-			{% for comment in comments %}
+            {% for comment in comments %}
+            
+            <div class="card text-center">
+                <div class="card-header">
+                  by:{{comment.user.username}}
+                </div>
+                <div class="card-body">
+                
+                  <p class="card-text">{{comment.description}}</p>
+                  
+                </div>
+                <div class="card-footer text-muted">
+                    <button class="btn btn-danger">delete</button>
+                </div>
+               
+            </div>
 				
-				<a href="#">
-						
-					<h4>{{ comment.description }}</h4>
-					 <b>posted by:</b>   <i>{{comment.user.username}}</i>
-				</a>
+				
 				
 			{% endfor %}
 			{% else %}

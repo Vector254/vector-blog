@@ -1,8 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, abort, request
 from . import main
-from ..models import Posts
+from ..models import Posts, Comment
 from .forms import CommentForm,PostForm
-from flask_login import login_required, current_user, 
+from flask_login import login_required, current_user
 
 @main.route('/')
 def index():
@@ -34,9 +34,9 @@ def new_post():
 
 @main.route('/comment/<int:post_id>', methods = ['GET','POST'])
 @login_required
-def new_comment():
+def new_comment(post_id):
     form = CommentForm()
-    post=Posts.query.get(post_id)
+    
     if form.validate_on_submit():
         post = form.post.data
 
@@ -46,5 +46,5 @@ def new_comment():
 
         return redirect(url_for('.new_comment', post_id= post_id))
     all_comments = Comment.query.filter_by(post_id = post_id).all()
-    return render_template('comments.html', form = form,comment = all_comments )
+    return render_template('comment.html', form = form,comment = all_comments )
 
