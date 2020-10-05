@@ -1,15 +1,22 @@
 from flask import Flask, render_template, redirect, url_for, abort, request
 from . import main
-from ..models import Posts, Comment, User
+from ..models import Posts, Comment, User, Subscribers
 from .forms import CommentForm,PostForm,UpdateProfile
 from flask_login import login_required, current_user
 from ..import db, photos
-from ..myemail import mail_message
+from ..email import mail_message
 
-@main.route('/')
+@main.route('/',methods = ["GET", "POST"])
 def index():
-
     posts = Posts.query.order_by(Posts.date_posted.desc()).all()
+
+    user=User()
+    if request.method == "POST":
+        subscribed = Subscribers(email = request.form.get("subs"))
+        db.session.add(subscribed)
+        db.session.commit()
+       
+    
     return render_template('index.html',posts = posts)
 
 @main.route('/about')
@@ -28,9 +35,20 @@ def new_post():
         author = form.author.data
         new_post = Posts(owner_id =current_user._get_current_object().id,post=post,author=author,title=title)
         new_post.save_post()
+  
 
         return redirect(url_for('main.index'))
     return render_template('posts.html',form=form)
+
+@main.route('/blog/<int:id>', methods = ['GET','POST'])
+@login_required
+def blog(id):
+    post = Posts.query.filter_by(id = id).first()
+  
+
+    
+    return render_template('blog.html',post=post)
+
 
 
 

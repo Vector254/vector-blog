@@ -7,15 +7,18 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">{{post.title}}</h5>
-          <p class="card-text">{{post.post}}</p>
-          <a href="#" class="btn btn-primary">read more >></a>
+          <p class="card-text">{{post.post|truncate(100)}}</p>
+          <a href="{{url_for('main.blog', id = post.id)}}" class="btn btn-primary">read more >></a>
           
         </div>
         <div class="card-footer text-muted">
           <b>posted:</b>{{post.date_posted}}
           <a href="{{url_for('main.new_comment',post_id = post.id)}}" class="btn btn-info">comment</a>
         </div>
+        
       </div>
+      <br>
+      
        
     {% endfor %}
 

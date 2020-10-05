@@ -6,11 +6,13 @@
 {% block content %}
 <div class="jumbotron text-center">
     <button class="btn"><a href="/post">post new blog</a></button>
-    <form action="">
-        <label for="subs">subscribe to our notification emails</label><br>
-        <input type="text" class="form-control" name="subs" placeholder="Enter your email...">
+    
+    <form  method="POST">
+        
+        <input type="email" class="form-control" name="subs" placeholder="Enter your email..." required>
         <button type="submit" class="btn btn-default">subscribe</button>
     </form>
+    
 </div>
 <div class="container">
     {{ macro.display(posts) }}
