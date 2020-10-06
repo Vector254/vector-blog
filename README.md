@@ -23,7 +23,7 @@ This is a flask project for a personal blog site, where users can view blogs, co
 
 ## Link to live page
 
-Find the live page [here](https://vector-blog-app.herokuapp.com/)
+Find the live page [here](https://vector-bloggers.herokuapp.com/)
 
 ## Technologies Used
  1. ubuntu linux for host OS
