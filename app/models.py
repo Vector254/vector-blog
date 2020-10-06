@@ -62,6 +62,14 @@ class Posts(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    @classmethod
+    def get_all_posts(cls):
+        return Post.query.order_by(Post.posted_at).all()
+
+    def delete_post(self):
+        db.session.delete(self)
+        db.session.commit()
+
     
     def __repr__(self):
         return f'User {self.pitch}'
