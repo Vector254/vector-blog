@@ -7,7 +7,7 @@ from wtforms import ValidationError
 	
 
 class CommentForm(FlaskForm):
-	post = TextAreaField('',validators=[Required()])
+	description = TextAreaField('',validators=[Required()])
 	submit = SubmitField() 
 
 class PostForm(FlaskForm):

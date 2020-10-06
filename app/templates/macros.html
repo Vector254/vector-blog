@@ -12,7 +12,7 @@
           
         </div>
         <div class="card-footer text-muted">
-          <b>posted:</b>{{post.date_posted}}
+          <b>posted on:</b>{{post.date_posted.strftime('%Y-%m-%d')}}
           <a href="{{url_for('main.new_comment',post_id = post.id)}}" class="btn btn-info">comment</a>
         </div>
         
