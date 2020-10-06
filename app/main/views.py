@@ -6,6 +6,7 @@ from flask_login import login_required, current_user
 from ..import db, photos
 from ..email import mail_message
 from ..requests import get_quote
+ 
 
 @main.route('/',methods = ["GET", "POST"])
 def index():
@@ -114,4 +115,5 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
 
