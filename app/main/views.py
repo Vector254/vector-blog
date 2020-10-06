@@ -9,7 +9,7 @@ from ..requests import get_quote
 
 @main.route('/',methods = ["GET", "POST"])
 def index():
-    posts = Posts.query.order_by(Posts.date_posted.desc()).all()
+    posts = Posts.get_all_posts()
     quote = get_quote()
     user=User()
     if request.method == "POST":
