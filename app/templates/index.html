@@ -4,15 +4,33 @@
 
 
 {% block content %}
-<div class="jumbotron text-center">
-    <button class="btn"><a href="/post">post new blog</a></button>
-    
-    <form  method="POST">
+<style>
+    .head{
+        height: 250px;
+        background-image: url(../static/images/back.jpg);
+        background-size: cover;
+        padding-top: 50px;
+    }
+  
+  body{
+    background-color: indianred;
+  }
+    .quote{
+        padding: 10px;
+    }
+</style>
+</style>
+<div class="head text-center">
+    <button class="btn btn-success"><a href="/post">post new blog</a></button>
+    <br>
+    <div class="row">
+        <div class="col-md-3"></div>
+    <form  class="col-md-6" method="POST">
         
         <input type="email" class="form-control" name="subs" placeholder="Enter your email..." required>
-        <button type="submit" class="btn btn-default">subscribe</button>
+        <button type="submit" class="btn btn-outline-primary">subscribe</button>
     </form>
-    
+    </div>
 </div>
 <div class="quote text-center">
     <b>"{{quote.description}}"</b><br>
