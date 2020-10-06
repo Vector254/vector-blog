@@ -16,6 +16,9 @@ def index():
         subscribed = Subscribers(email = request.form.get("subs"))
         db.session.add(subscribed)
         db.session.commit()
+
+        mail_message("Welcome to Vector-blog", 
+                        "email/welcome_user", subscribed.email)
        
     
     return render_template('index.html',posts = posts,quote=quote)
@@ -36,7 +39,11 @@ def new_post():
         author = form.author.data
         new_post = Posts(owner_id =current_user._get_current_object().id,post=post,author=author,title=title)
         new_post.save_post()
-  
+        subs = Subscribers.query.all()
+        for sub in subs:
+            mail_message('New blog posted', 
+                            "email/welcome_user", sub.email, new_post = new_post)
+            pass
 
         return redirect(url_for('main.index'))
     return render_template('posts.html',form=form)
