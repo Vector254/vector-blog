@@ -51,9 +51,10 @@ class Posts(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
     author = db.Column(db.String(50))
-    date_posted = db.Column(db.DateTime)
+    date_posted = db.Column(db.DateTime, default=db.func.current_timestamp())
     title = db.Column(db.String(50))
     post = db.Column(db.String(999))
+    
 
     comments = db.relationship('Comment',backref='post',lazy='dynamic')
    

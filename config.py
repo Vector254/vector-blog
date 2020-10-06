@@ -11,12 +11,13 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
-    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    MAIL_USERNAME='ochrist7@gmail.com'
+    MAIL_PASSWORD='kqknodjuiugsolwb'
+    SECRET_KEY='A_long_string_of_characters'
 
 class ProdConfig(Config):
-  
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+   
     '''
     Production  configuration child class
     Args:
