@@ -3,7 +3,7 @@ import os
 
 class Config:
 
-    SECRET_KEY = os.urandom(32)
+    SECRET_KEY = os.environ.get("SECRET_KEY")
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://vector:12345q@localhost/blog'
     UPLOADED_PHOTOS_DEST ='app/static/images'
 
