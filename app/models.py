@@ -64,7 +64,7 @@ class Posts(db.Model):
 
     @classmethod
     def get_all_posts(cls):
-        return Posts.query.order_by(Posts.posted_at).all()
+        return Posts.query.order_by(Posts.date_posted).all()
 
     def delete_post(self):
         db.session.delete(self)
